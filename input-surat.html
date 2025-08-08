@@ -118,7 +118,7 @@
 
         function updateTombolUpload() {
           const val = selectJenis.value.trim().toLowerCase();
-          btnUpload.style.display = (val === "") ? "inline-flex" : "none";
+          btnUpload.style.display = "inline-flex"; // Selalu muncul
         }
 
         updateTombolUpload();
@@ -142,3 +142,4 @@
     </script>
   </body>
 </html>
+
