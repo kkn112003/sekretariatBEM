@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Halaman Anggota</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <script>
+    // Cek apakah user sudah login SEBELUM konten muncul
+    if (!localStorage.getItem("currentUser")) {
+      window.location.href = "login.html";
+    }
+  </script>
+</head>
+<body>
+  <!-- Konten Halaman Anggota -->
+  <h1>Selamat Datang di Halaman Anggota</h1>
+</body>
+</html>

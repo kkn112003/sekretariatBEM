@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <title>Struktur Organisasi - Sekretariat BEM</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="logo">
+        <img src="aset/logoBemFooter.png" alt="Logo BEM" />
+        <h2>Sekretariat BEM</h2>
+      </div>
+      <button class="nav-toggle" onclick="toggleMenu()">☰</button>
+      <nav id="navMenu">
+        <a href="index.html">Beranda</a>
+        <a href="absensi.html">Absensi</a>
+        <a href="input-surat.html">Input Surat</a>
+        <a href="rekap.html">Rekap</a>
+        <a href="anggota.html">Anggota</a>
+        <a href="kontak.html">Kontak</a>
+<!-- Di bagian tombol logout -->
+<a href="#" class="logout-link" onclick="showLogoutModal()">
+  <i class="bi bi-box-arrow-right"></i> Logout
+</a>
+
+      </nav>
+    </header>
+
+    <main>
+        <h2 style="margin-bottom: 1.5rem; text-align: center">
+            STRUKTUR BEM STMIK IKMI CIREBON PERIODE 2025/2026
+        </h2>
+        
+        <!-- Semua grup digabung dalam satu wrapper -->
+        <section class="grup-wrapper">
+            <div class="anggota">
+                <div class="info">
+                    <p class="jabatan">Presiden Mahasiswa</p>
+                    <ul class="nama-list">
+                        <li>Moh Ari Widoyono</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="anggota">
+                <div class="info">
+                    <p class="jabatan">Wakil Presiden</p>
+                    <ul class="nama-list">
+                        <li>Muhammad Zamil Farhan</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="anggota">
+                <div class="info">
+                    <p class="jabatan">Sekretaris Jenderal</p>
+                    <ul class="nama-list">
+                        <li>Kukun Kurniawan</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="anggota">
+                <div class="info">
+                    <p class="jabatan">Sekretaris Kementerian</p>
+                    <ul class="nama-list">
+                        <li>Yulinda Sari</li>
+                        <li>Liva</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="anggota">
+                <div class="info">
+                    <p class="jabatan">Kementerian Keuangan</p>
+                    <ul class="nama-list">
+                        <li>Ulfah Ulfiah</li>
+                        <li>Nama Anggota</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="anggota">
+                <div class="info">
+                    <p class="jabatan">Kementerian Dalam Negeri</p>
+                    <ul class="nama-list">
+                        <li>Naufal</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="anggota">
+                <div class="info">
+                    <p class="jabatan">Kementerian Luar Negeri</p>
+                    <ul class="nama-list">
+                        <li>Ruliansyah</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="anggota">
+                <div class="info">
+                    <p class="jabatan">Kementerian Riset dan Teknologi</p>
+                    <ul class="nama-list">
+                        <li>Rifki Hermawan</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="anggota">
+                <div class="info">
+                    <p class="jabatan">Kementerian PSDM</p>
+                    <ul class="nama-list">
+                        <li>Dzaky</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="anggota">
+                <div class="info">
+                    <p class="jabatan">Kementerian Komunikasi dan Informasi</p>
+                    <ul class="nama-list">
+                        <li>Imin</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="anggota">
+                <div class="info">
+                    <p class="jabatan">Kementerian Agama</p>
+                    <ul class="nama-list">
+                        <li>Riza Alraihany</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                        <li>Nama Anggota</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+  <!-- Modal Konfirmasi Logout -->
+<div id="logoutModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <p>Yakin ingin logout?</p>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeLogoutModal()">Batal</button>
+      <button class="btn-confirm" onclick="confirmLogout()">Logout</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Terapkan dark mode berdasarkan preferensi dari localStorage
+      document.addEventListener("DOMContentLoaded", function () {
+        const isDark = localStorage.getItem("darkMode") === "true";
+        document.body.classList.toggle("dark-mode", isDark);
+      });
+
+              // Fungsi logout
+function logout() {
+  // Tampilkan modal konfirmasi logout
+  document.getElementById("logoutModal").style.display = "flex";
+}
+
+function closeLogoutModal() {
+  // Tutup modal
+  document.getElementById("logoutModal").style.display = "none";
+}
+
+function confirmLogout() {
+  // Hapus data login dan arahkan ke login
+  localStorage.removeItem("currentUser");
+  window.location.href = "login.html";
+}
+ function showLogoutModal() {
+  document.getElementById("logoutModal").style.display = "flex";
+}
+ </script>
+    <script src="main.js"></script>
+  </body>
+</html>

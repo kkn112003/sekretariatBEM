@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Sekretariat BEM</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <div class="login-card">
+    <div class="logo">
+      <img src="aset/logoBemFooter.png" alt="Logo BEM">
+    </div>
+    <h2>Sekretariat BEM</h2>
+    <p>Masuk untuk mengelola data</p>
+
+    <div class="input-group">
+      <input type="text" id="username" placeholder="Username" required />
+    </div>
+    <div class="input-group">
+      <input type="password" id="password" placeholder="Password" required />
+      <i class="fas fa-eye toggle-password" onclick="togglePassword()"></i>
+    </div>
+
+    <div class="options">
+      <label><input type="checkbox" id="remember" /> Remember this device</label>
+    </div>
+
+    <button class="btn-login" onclick="login()">Masuk</button>
+
+    <div class="security-info">
+      <i class="fas fa-info-circle"></i>
+      <span>Info lebih lanjut? 
+        <a href="https://bit.ly/3Ua9UyU" target="_blank">Hubungi Sekretaris Jendral</a>
+      </span>
+    </div>
+  </div>
+
+  <!-- Popup -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup-box" id="popupBox">
+      <h3 id="popupTitle"></h3>
+      <p id="popupMessage"></p>
+      <button onclick="closePopup()">OK</button>
+    </div>
+  </div>
+
+<script>
+  const users = [
+    { username: "sekjen", password: "sekjen" },
+    { username: "sekretaris", password: "sekretaris1" },
+    { username: "sekretaris", password: "sekretaris2" },
+  ];
+
+  function login() {
+    const uname = document.getElementById("username").value.trim();
+    const pass = document.getElementById("password").value.trim();
+    const user = users.find(u => u.username === uname && u.password === pass);
+
+    if (user) {
+      localStorage.setItem("currentUser", JSON.stringify(user));
+      showPopup("success", "Berhasil Login", "Selamat datang, " + uname + ".");
+    } else {
+      showPopup("error", "Gagal Login", "Username atau Password salah. Silakan coba lagi.");
+      document.getElementById("username").value = "";
+      document.getElementById("password").value = "";
+    }
+  }
+
+  function togglePassword() {
+    const passField = document.getElementById("password");
+    const icon = document.querySelector(".toggle-password");
+    if (passField.type === "password") {
+      passField.type = "text";
+      icon.classList.replace("fa-eye", "fa-eye-slash");
+    } else {
+      passField.type = "password";
+      icon.classList.replace("fa-eye-slash", "fa-eye");
+    }
+  }
+
+  function showPopup(type, title, message) {
+    const popup = document.getElementById("popup");
+    const popupBox = document.getElementById("popupBox");
+    document.getElementById("popupTitle").textContent = title;
+    document.getElementById("popupMessage").textContent = message;
+
+    popupBox.className = "popup-box " + type; // class success / error
+    popup.style.display = "flex";
+  }
+
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+    if (document.getElementById("popupBox").classList.contains("success")) {
+      window.location.href = "index.html";
+    }
+  }
+
+  // Hapus session jika ada
+  localStorage.removeItem("currentUser");
+
+  // (Opsional) Redirect user jika masih login — tapi akan selalu kosong karena baris di atas
+  if (localStorage.getItem("currentUser")) {
+    window.location.href = "index.html";
+  }
+</script>
+
+</body>
+</html>

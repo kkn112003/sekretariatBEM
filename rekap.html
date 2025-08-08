@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rekap Data</title>
+    <link rel="stylesheet" href="style.css" />
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="logo">
+        <img src="aset/logoBemFooter.png" alt="Logo BEM" />
+        <h2>Sekretariat BEM</h2>
+      </div>
+      <button class="nav-toggle" onclick="toggleMenu()">☰</button>
+      <nav id="navMenu">
+        <a href="index.html">Beranda</a>
+        <a href="absensi.html">Absensi</a>
+        <a href="input-surat.html">Input Surat</a>
+        <a href="rekap.html" class="active">Rekap</a>
+        <a href="anggota.html">Anggota</a>
+        <a href="kontak.html">Kontak</a>
+        <a href="#" class="logout-link" onclick="logout()">
+          <i class="bi bi-box-arrow-right"></i> Logout
+        </a>
+      </nav>
+    </header>
+
+    <!-- Popup konfirmasi hapus data -->
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <h3>Yakin ingin menghapus data ini?</h3>
+        <div class="popup-buttons">
+          <button onclick="tutupPopup()" class="no">No</button>
+          <button id="confirmYes" class="yes">Yes</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup konfirmasi hapus semua absensi -->
+    <div id="popupHapusSemua" class="popup">
+      <div class="popup-content">
+        <h3>Yakin ingin menghapus semua data absensi?</h3>
+        <div class="popup-buttons">
+          <button onclick="tutupPopupHapusSemua()" class="no">No</button>
+          <button onclick="konfirmasiHapusSemua()" class="yes">Yes</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup sukses hapus semua -->
+    <div id="popupHapusSukses" class="popup">
+      <div class="popup-content">
+        <div style="font-size: 50px; color: green">&#10004;</div>
+        <h3>Absensi Dihapus</h3>
+        <p>Semua data absensi berhasil dihapus.</p>
+      </div>
+    </div>
+
+    <!-- Popup Konfirmasi Export Absen -->
+    <div id="popupKonfirmasiExportAbsen" class="popup">
+      <div class="popup-content">
+        <h3>Yakin ingin export data absen?</h3>
+        <div class="popup-buttons">
+          <button onclick="closePopup('popupKonfirmasiExportAbsen')" class="no">
+            No
+          </button>
+          <button onclick="prosesExportAbsen()" class="yes">Yes</button>
+        </div>
+      </div>
+    </div>
+    <!-- Popup export absen -->
+    <div id="popupExportAbsen" class="popup">
+      <div class="popup-content">
+        <div style="font-size: 50px; color: green">&#10004;</div>
+        <h3>Export Absen Berhasil</h3>
+        <p>File absensi sudah disimpan.</p>
+      </div>
+    </div>
+
+    <!-- Popup Konfirmasi Export Surat -->
+    <div id="popupKonfirmasiExportSurat" class="popup">
+      <div class="popup-content">
+        <h3>Yakin ingin export data surat?</h3>
+        <div class="popup-buttons">
+          <button onclick="closePopup('popupKonfirmasiExportSurat')" class="no">
+            No
+          </button>
+          <button onclick="prosesExportSurat()" class="yes">Yes</button>
+        </div>
+      </div>
+    </div>
+    <!-- Popup export surat -->
+    <div id="popupExportSurat" class="popup">
+      <div class="popup-content">
+        <div style="font-size: 50px; color: green">&#10004;</div>
+        <h3>Export Surat Berhasil</h3>
+        <p>File surat sudah disimpan.</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2 class="section-title">Rekap Absensi</h2>
+      <table id="rekap-absensi" class="animated-table">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Jabatan</th>
+            <th>Keterangan</th>
+            <th>Kegiatan</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="rekapAbsensi"></tbody>
+      </table>
+
+      <!-- Tombol hapus semua absensi (mobile only) -->
+      <button
+        type="button"
+        id="hapusSemuaAbsensi"
+        class="btn-hapus-mobile"
+        onclick="hapusSemuaAbsensi()"
+      >
+        Hapus Semua Absen
+      </button>
+
+      <h2 class="section-title">Rekap Surat</h2>
+      <table id="rekap-surat" class="animated-table">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Nomor Surat</th>
+            <th>Tanggal</th>
+            <th>Jenis Surat</th>
+            <th>Perihal</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="rekapSurat"></tbody>
+      </table>
+      <div class="export-buttons">
+        <button onclick="exportAbsenConfirm()">Export Absen</button>
+        <button onclick="exportSuratConfirm()">Export Surat</button>
+      </div>
+    </div>
+   <!-- Modal Konfirmasi Logout -->
+    <div id="logoutModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <p>Yakin ingin logout?</p>
+        <div class="modal-actions">
+          <button class="btn-cancel" onclick="closeLogoutModal()">Batal</button>
+          <button class="btn-confirm" onclick="confirmLogout()">Logout</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      let dataTipe = "";
+      let indexHapus = null;
+
+      function tampilkanRekapAbsensi() {
+        const dataAbsensi = JSON.parse(localStorage.getItem("absensi")) || [];
+        const rekapAbsensi = document.getElementById("rekapAbsensi");
+        rekapAbsensi.innerHTML = "";
+
+        dataAbsensi.forEach((data, index) => {
+          rekapAbsensi.innerHTML += `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${data.nama}</td>
+            <td>${data.jabatan}</td>
+            <td>${data.keterangan}</td>
+            <td>${data.kegiatan}</td>
+            <td><button class="btn-delete" onclick="konfirmasiHapus('absensi', ${index})">Hapus</button></td>
+          </tr>
+        `;
+        });
+      }
+
+      function tampilkanRekapSurat() {
+        const dataSurat = JSON.parse(localStorage.getItem("suratMasuk")) || [];
+        const rekapSurat = document.getElementById("rekapSurat");
+        rekapSurat.innerHTML = "";
+
+        dataSurat.forEach((data, index) => {
+          rekapSurat.innerHTML += `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${data.nomor}</td>
+            <td>${data.tanggal}</td>
+            <td>${data.jenis}</td>
+            <td>${data.perihal}</td>
+            <td><button class="btn-delete" onclick="konfirmasiHapus('surat', ${index})">Hapus</button></td>
+          </tr>
+        `;
+        });
+      }
+
+      function konfirmasiHapus(tipe, index) {
+        dataTipe = tipe;
+        indexHapus = index;
+        document.getElementById("popup").style.display = "flex";
+      }
+
+      function tutupPopup() {
+        document.getElementById("popup").style.display = "none";
+      }
+
+      document
+        .getElementById("confirmYes")
+        .addEventListener("click", function () {
+          if (dataTipe === "absensi") {
+            const data = JSON.parse(localStorage.getItem("absensi")) || [];
+            data.splice(indexHapus, 1);
+            localStorage.setItem("absensi", JSON.stringify(data));
+            tampilkanRekapAbsensi();
+          } else if (dataTipe === "surat") {
+            const data = JSON.parse(localStorage.getItem("suratMasuk")) || [];
+            data.splice(indexHapus, 1);
+            localStorage.setItem("suratMasuk", JSON.stringify(data));
+            tampilkanRekapSurat();
+          }
+          tutupPopup();
+        });
+
+      // ====== Fungsi hapus semua absensi ======
+      function hapusSemuaAbsensi() {
+        document.getElementById("popupHapusSemua").style.display = "flex";
+      }
+
+      function tutupPopupHapusSemua() {
+        document.getElementById("popupHapusSemua").style.display = "none";
+      }
+
+      function konfirmasiHapusSemua() {
+        localStorage.removeItem("absensi");
+        document.getElementById("popupHapusSemua").style.display = "none";
+        document.getElementById("popupHapusSukses").style.display = "flex";
+        setTimeout(() => {
+          tutupPopupHapusSukses();
+          location.reload();
+        }, 2000);
+      }
+
+      function tutupPopupHapusSukses() {
+        document.getElementById("popupHapusSukses").style.display = "none";
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const isDark = localStorage.getItem("darkMode") === "true";
+        document.body.classList.toggle("dark-mode", isDark);
+        tampilkanRekapAbsensi();
+        tampilkanRekapSurat();
+      });
+
+      function toggleMenu() {
+        document.getElementById("navMenu").classList.toggle("show");
+      }
+
+      function exportAbsen() {
+        const table = document.getElementById("rekap-absensi");
+        if (!table) return;
+        const wb = XLSX.utils.table_to_book(table, { sheet: "Sheet1" });
+        XLSX.writeFile(wb, "rekap_absen.xlsx");
+
+        // Tampilkan popup centang
+        document.getElementById("popupExportAbsen").style.display = "flex";
+        setTimeout(() => {
+          document.getElementById("popupExportAbsen").style.display = "none";
+        }, 2000);
+      }
+
+      function exportSurat() {
+        const table = document.getElementById("rekap-surat");
+        if (!table) return;
+        const wb = XLSX.utils.table_to_book(table, { sheet: "Sheet1" });
+        XLSX.writeFile(wb, "rekap_surat.xlsx");
+
+        // Tampilkan popup centang
+        document.getElementById("popupExportSurat").style.display = "flex";
+        setTimeout(() => {
+          document.getElementById("popupExportSurat").style.display = "none";
+        }, 2000);
+      }
+
+      // Buka popup konfirmasi
+      function openPopup(id) {
+        document.getElementById(id).style.display = "flex";
+      }
+
+      // Tutup popup
+      function closePopup(id) {
+        document.getElementById(id).style.display = "none";
+      }
+
+      // Tombol untuk membuka konfirmasi export
+      function exportAbsenConfirm() {
+        openPopup("popupKonfirmasiExportAbsen");
+      }
+
+      function exportSuratConfirm() {
+        openPopup("popupKonfirmasiExportSurat");
+      }
+
+      // Proses export absen
+      function prosesExportAbsen() {
+        closePopup("popupKonfirmasiExportAbsen");
+
+        const table = document.getElementById("rekap-absensi");
+        if (!table) return;
+        const wb = XLSX.utils.table_to_book(table, { sheet: "Sheet1" });
+        XLSX.writeFile(wb, "rekap_absen.xlsx");
+
+        document.getElementById("popupExportAbsen").style.display = "flex";
+        setTimeout(() => {
+          document.getElementById("popupExportAbsen").style.display = "none";
+        }, 2000);
+      }
+
+      // Proses export surat
+      function prosesExportSurat() {
+        closePopup("popupKonfirmasiExportSurat");
+
+        const table = document.getElementById("rekap-surat");
+        if (!table) return;
+        const wb = XLSX.utils.table_to_book(table, { sheet: "Sheet1" });
+        XLSX.writeFile(wb, "rekap_surat.xlsx");
+
+        document.getElementById("popupExportSurat").style.display = "flex";
+        setTimeout(() => {
+          document.getElementById("popupExportSurat").style.display = "none";
+        }, 2000);
+      }
+        // Fungsi logout
+function logout() {
+  // Tampilkan modal konfirmasi logout
+  document.getElementById("logoutModal").style.display = "flex";
+}
+
+function closeLogoutModal() {
+  // Tutup modal
+  document.getElementById("logoutModal").style.display = "none";
+}
+
+function confirmLogout() {
+  // Hapus data login dan arahkan ke login
+  localStorage.removeItem("currentUser");
+  window.location.href = "login.html";
+}
+    </script>
+  </body>
+</html>

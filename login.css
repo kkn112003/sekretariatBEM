@@ -1,0 +1,213 @@
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: linear-gradient(135deg, #f6f9fc, #eef1f4);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .login-card {
+        background: #fff;
+        padding: 40px 30px;
+        width: 360px;
+        border-radius: 16px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        text-align: center;
+      }
+      .login-card .logo {
+        border-radius: 12px;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto 15px auto;
+        overflow: hidden;
+      }
+      .login-card .logo img {
+        width: 95%;
+        height: auto;
+      }
+      .login-card h2 {
+        margin: 0;
+        font-size: 22px;
+        font-weight: bold;
+        color: #222;
+      }
+      .login-card p {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 25px;
+      }
+      .input-group {
+        position: relative;
+        margin-bottom: 15px;
+      }
+      .input-group input {
+        width: 100%;
+        height: 44px;
+        padding: 0 40px 0 16px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        background-color: #fafafa;
+        box-sizing: border-box;
+        transition: border-color 0.3s, background-color 0.3s;
+      }
+      .input-group input:focus {
+        outline: none;
+        border-color: #4a4de7;
+        background-color: #fff;
+      }
+      .input-group .toggle-password {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #888;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 13px;
+        margin-bottom: 20px;
+      }
+      .options label {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+      }
+      .options a {
+        color: #4a4de7;
+        text-decoration: none;
+      }
+      .options a:hover {
+        text-decoration: underline;
+      }
+      .btn-login {
+        width: 100%;
+        background: #4a4de7;
+        color: #fff;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        font-size: 15px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s;
+      }
+      .btn-login:hover {
+        background: #393bca;
+      }
+      .security-info {
+        margin-top: 18px;
+        font-size: 12px;
+        color: #2f855a;
+        background: #d1fae5;
+        padding: 10px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-align: left;
+      }
+      #errorMsg {
+        color: red;
+        font-size: 13px;
+        margin-bottom: 8px;
+      }
+
+      /* Responsive untuk layar kecil */
+@media (max-width: 480px) {
+  .login-card {
+    width: 80%;
+    padding: 25px 20px;
+  }
+
+  .login-card h2 {
+    font-size: 20px;
+  }
+
+  .login-card p {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  .input-group input {
+    height: 42px;
+    font-size: 13px;
+  }
+
+  .btn-login {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .security-info {
+    font-size: 11px;
+    padding: 8px;
+  }
+}
+
+.security-info a {
+  color: #2563eb; /* biru */
+  font-weight: 500;
+  text-decoration: none;
+}
+.security-info a:hover {
+  text-decoration: underline;
+}
+/*================= POP UP ===========*/
+    /* Popup overlay */
+    .popup-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+    /* Popup box */
+    .popup-box {
+      background: white;
+      padding: 20px 25px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      animation: fadeIn 0.3s ease;
+    }
+    .popup-box.success { border-top: 4px solid #22c55e; }
+    .popup-box.error { border-top: 4px solid #ef4444; }
+    .popup-box h3 {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+    .popup-box p {
+      font-size: 14px;
+      color: #555;
+    }
+    .popup-box button {
+      margin-top: 15px;
+      padding: 8px 18px;
+      border: none;
+      border-radius: 6px;
+      background: #4a4de7;
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .popup-box button:hover {
+      background: #393bca;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
