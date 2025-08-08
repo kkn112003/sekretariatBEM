@@ -1670,3 +1670,7 @@ body.dark-mode .btn-upload:hover {
   .btn-confirm:hover {
     background-color: #c0392b;
   }
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
