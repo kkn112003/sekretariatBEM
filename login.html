@@ -97,10 +97,7 @@
     }
   }
 
-  // Hapus session jika ada
-  localStorage.removeItem("currentUser");
-
-  // (Opsional) Redirect user jika masih login — tapi akan selalu kosong karena baris di atas
+  // Jika user sudah login, langsung arahkan ke index.html
   if (localStorage.getItem("currentUser")) {
     window.location.href = "index.html";
   }
